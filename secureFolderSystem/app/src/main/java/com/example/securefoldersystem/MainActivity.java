@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             if (passEntered.equals(editPass)){
                 System.out.println("EDIT PASS ENTERED");
+                Intent edit = new Intent(MainActivity.this, Edit.class);
+                startActivity(edit);
             } else {
                 TextView error =  (TextView) findViewById(R.id.error);
                 error.setVisibility(View.VISIBLE);
