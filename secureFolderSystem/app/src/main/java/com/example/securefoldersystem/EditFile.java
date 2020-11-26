@@ -2,6 +2,7 @@ package com.example.securefoldersystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
@@ -36,6 +37,7 @@ public class EditFile extends AppCompatActivity {
 
         Button saveFile = (Button) findViewById(R.id.saveFile);
         saveFile.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onClick(View v) {
                 EditText fn = (EditText) findViewById(R.id.editFileName);
@@ -60,7 +62,7 @@ public class EditFile extends AppCompatActivity {
 //                    }
 
                 FileOutputStream fOut = null;
-                try {
+                try{
                     fOut = openFileOutput(fileName, Context.MODE_PRIVATE);
                     fOut.write(fileContent.getBytes());
                     fOut.close();
@@ -78,6 +80,8 @@ public class EditFile extends AppCompatActivity {
 
             }
         });
+
+        
     }
 
 
