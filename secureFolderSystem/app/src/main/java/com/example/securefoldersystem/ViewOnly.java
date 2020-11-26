@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,11 +16,14 @@ import com.sromku.simple.storage.SimpleStorage;
 import com.sromku.simple.storage.Storage;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.nio.file.DirectoryStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewOnly extends AppCompatActivity {
     String path = Environment.getDataDirectory() + "/secureFolderSystem";
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +37,22 @@ public class ViewOnly extends AppCompatActivity {
                 startActivity(logout);
             }
         });
+        context = getApplicationContext();
+        ArrayList<File> fileList = new ArrayList<>();
+        File filesDir = context.getDir("files", context.MODE_PRIVATE);
+        File[] allFiles = filesDir.listFiles();
+        if (allFiles != null && allFiles.length > 0) {
+            for (File f : allFiles)  {
+                if (f.isFile()) {
+                    fileList.add(f);
+                }
+            }
+        }
 
-
-        //List<File> files = s;
         RecyclerView viewFiles = (RecyclerView) findViewById(R.id.filesView);
+        FileAdapter fAdapter = new FileAdapter(this.getLayoutInflater(), fileList);
         viewFiles.setLayoutManager(new LinearLayoutManager(this));
-      //  FileAdapter fAdapter = new FileAdapter(this.getLayoutInflater(), files);
-      //  viewFiles.setAdapter(fAdapter);
+        viewFiles.setAdapter(fAdapter);
     }
+
 }
