@@ -78,6 +78,8 @@ public class Edit extends AppCompatActivity {
                 // System.out.println("EDIT FILE SET ON ITEM CLICK LISTENER PRESSED");
                 File clickedItem = (File) editFiles.getItemAtPosition(position);
                 Intent editFile = new Intent(Edit.this, EditFile.class);
+                String fileName = clickedItem.getName();
+                editFile.putExtra("fileSelected", fileName);
                 startActivity(editFile);
             }
 
