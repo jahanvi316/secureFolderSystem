@@ -26,7 +26,7 @@ public class ViewFile extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         setContentView(R.layout.activity_view_file);
-        System.out.println("VIEW FILE IS CALLED");
+       // System.out.println("VIEW FILE IS CALLED");
         String clickedFile = getIntent().getStringExtra("fileView");
         clickedFile = clickedFile.substring(4);
         System.out.println("clicked file: " + clickedFile);

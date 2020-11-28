@@ -1,9 +1,11 @@
 package com.example.securefoldersystem;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,19 +23,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class EditFile extends AppCompatActivity {
+    String path = Environment.getDataDirectory() + "/secureFolderSystem";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_file);
-        String path = Environment.getDataDirectory() + "/secureFolderSystem";
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         setContentView(R.layout.activity_edit_file);
-        System.out.println("EDIT FILE IS CALLED");
+       // System.out.println("EDIT FILE IS CALLED");
 
         String clickedFile = getIntent().getStringExtra("fileSelected");
         clickedFile = clickedFile.substring(4);
@@ -92,8 +94,11 @@ public class EditFile extends AppCompatActivity {
                     fOut = openFileOutput(fileName, Context.MODE_PRIVATE);
                     fOut.write(fileContent.getBytes());
                     fOut.close();
+                    Intent save = new Intent(EditFile.this, Edit.class);
+                    startActivity(save);
                     Toast.makeText(EditFile.this, "File updated successfuly.", 10).show();
                     System.out.println("successful :)");
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     Toast.makeText(EditFile.this, "File not found.", 10).show();
@@ -111,7 +116,29 @@ public class EditFile extends AppCompatActivity {
         deleteFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EditText fn = (EditText) findViewById(R.id.editFileName);
+                String fileName = fn.getText().toString();
+                File dir = getFilesDir();
+                final File f = new File(dir, fileName);
+                final AlertDialog.Builder deleteConfirmation = new AlertDialog.Builder(EditFile.this);
+                deleteConfirmation.setTitle("Delete File");
+                deleteConfirmation.setMessage("Are you sure you want to delete this file?");
+                deleteConfirmation.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean deleted = f.delete();
+                        System.out.println("DELETED: " + deleted);
+                        Intent edit = new Intent(EditFile.this, Edit.class);
+                        startActivity(edit);
+                    }
+                });
+                deleteConfirmation.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        System.out.println("DELETE CANCELED");
+                    }
+                });
+                deleteConfirmation.show();
             }
         });
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -61,6 +62,8 @@ public class AddFile extends AppCompatActivity {
                     fOut = openFileOutput(fileName, Context.MODE_PRIVATE);
                     fOut.write(fileContent.getBytes());
                     fOut.close();
+                    Intent save = new Intent(AddFile.this, Edit.class);
+                    startActivity(save);
                     Toast.makeText(AddFile.this, "File created successfuly.", 10).show();
                     System.out.println("successful :)");
                 } catch (FileNotFoundException e) {
