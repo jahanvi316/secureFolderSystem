@@ -8,18 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 
-import com.sromku.simple.storage.SimpleStorage;
-import com.sromku.simple.storage.Storage;
-
 import java.io.File;
-import java.lang.reflect.Array;
-import java.nio.file.DirectoryStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ViewOnly extends AppCompatActivity {
     String path = Environment.getDataDirectory() + "/secureFolderSystem";
@@ -45,12 +38,13 @@ public class ViewOnly extends AppCompatActivity {
             for (File f : allFiles)  {
                 if (f.isFile()) {
                     fileList.add(f);
+                    System.out.println("File added: " + f);
                 }
             }
         }
 
         RecyclerView viewFiles = (RecyclerView) findViewById(R.id.filesView);
-        FileAdapter fAdapter = new FileAdapter(this.getLayoutInflater(), fileList);
+        ListAdapter fAdapter = new ListAdapter(this.getLayoutInflater(), fileList);
         viewFiles.setLayoutManager(new LinearLayoutManager(this));
         viewFiles.setAdapter(fAdapter);
     }

@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".EditFile"></activity>
+        <activity android:name=".AddFile" />
         <activity android:name=".Edit" />
         <activity android:name=".ViewOnly" />
         <activity android:name=".MainActivity">
