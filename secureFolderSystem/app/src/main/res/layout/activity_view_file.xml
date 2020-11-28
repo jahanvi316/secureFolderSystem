@@ -25,7 +25,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="Name"
+            android:textColor="@color/blue"
+            android:textSize="36sp" />
 
         <TextView
             android:id="@+id/viewFileContent"
@@ -35,7 +37,9 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbarStyle="outsideInset" />
+            android:scrollbarStyle="outsideInset"
+            android:textColor="@color/pink"
+            android:textSize="24sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

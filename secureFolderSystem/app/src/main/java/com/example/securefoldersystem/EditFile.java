@@ -33,6 +33,8 @@ public class EditFile extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         setContentView(R.layout.activity_edit_file);
+        System.out.println("EDIT FILE IS CALLED");
+
         String clickedFile = getIntent().getStringExtra("fileSelected");
         clickedFile = clickedFile.substring(4);
         System.out.println("clicked file: " + clickedFile);
@@ -101,6 +103,14 @@ public class EditFile extends AppCompatActivity {
                     Toast.makeText(EditFile.this, "File Failed.", 10).show();
                     System.out.println("IO Exception error :(");
                 }
+
+            }
+        });
+
+        Button deleteFile = (Button) findViewById(R.id.deleteFile);
+        deleteFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });

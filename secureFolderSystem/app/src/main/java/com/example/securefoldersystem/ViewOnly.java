@@ -52,11 +52,10 @@ public class ViewOnly extends AppCompatActivity {
         viewFiles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // System.out.println("EDIT FILE SET ON ITEM CLICK LISTENER PRESSED");
                 File clickedItem = (File) viewFiles.getItemAtPosition(position);
                 Intent viewFile = new Intent(ViewOnly.this, ViewFile.class);
                 String fileName = clickedItem.getName();
-                viewFile.putExtra("fileSelected", fileName);
+                viewFile.putExtra("fileView", fileName);
                 startActivity(viewFile);
             }
 
